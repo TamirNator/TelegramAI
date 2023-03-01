@@ -16,10 +16,16 @@ queue = sqs.get_queue_by_name(
 
 
 def process_msg(msg):
-    search_download_youtube_video(msg)
+    videos_result = search_download_youtube_video(msg)
+    filename = videos_result[0]['filename']
+    s3 = boto3.client("s3")
+    s3.upload_file(
+    Filename=f"./{filename}",
+    Bucket="tamir-s3",
+    Key=f"ex1/{filename}"
+)
 
-    # TODO upload the downloaded video to your S3 bucket
-
+    
 
 def main():
     while True:

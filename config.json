@@ -1,6 +1,6 @@
 {
-  "aws_region": "<app-aws-region>",
-  "bot_to_worker_queue_name": "<your-sqs-queue-name>",
-  "autoscaling_group_name": "<your-asg-name>",
-  "telegram_token_secret_name": "<your-telegram-token-name>"
+  "aws_region": "us-east-1",
+  "bot_to_worker_queue_name": "tamir-sqs-ex1",
+  "autoscaling_group_name": "tamir-auto-scaling-ex1",
+  "telegram_token_secret_name": "tamir-telegramToken"
 }

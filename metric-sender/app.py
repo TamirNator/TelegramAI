@@ -29,12 +29,29 @@ def main():
         logger.info(f'backlog per instance: {backlog_per_instance}')
 
         # TODO send the backlog_per_instance metric to cloudwatch
+        cloudwatch = boto3.client('cloudwatch', region_name=config.get('aws_region'))
+        cloudwatch.put_metric_data(
+            MetricData=[
+                {
+                    'MetricName': 'Tamir-telegram',
+                    'Dimensions': [
+                        {
+                            'Name': 'Tamir-metrics',
+                            'Value': 'backlog_per_instance'
+                        },
+                    ],
+                    'Unit': 'None',
+                    'Value':  backlog_per_instance
+                },
+            ],
+            Namespace='tamir-metrics-namespace'
+        )
 
         time.sleep(60)
 
 
 if __name__ == '__main__':
-    with open('../config.json') as f:
+    with open('config.json') as f:
         config = json.load(f)
 
     bot_to_worker_queue_name = config.get('bot_to_worker_queue_name')

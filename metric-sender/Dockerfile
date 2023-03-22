@@ -1,8 +1,10 @@
 FROM python:3.8.12-slim-buster
 WORKDIR /app
 
-# TODO YOUR COMMANDS HERE
-# ....
-# ....
+COPY utils.py  ./utils.py
+COPY config.json  ./config.json
+COPY ./metric-sender  ./
 
-CMD ["python3", "-m", "metric-sender.app"]
+RUN pip3 install -r requirements.txt -t .
+
+CMD ["python3", "-m", "app"]
